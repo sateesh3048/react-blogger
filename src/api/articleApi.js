@@ -1,16 +1,48 @@
-import axios from "axios";
-
+import Axios from "../lib/Axios";
 class ArticleApi {
-
   static getAllArticles(){
-    return axios.get("http://localhost:3000/articles.json")
+    return Axios.get("/articles.json")
     .then((response) => {
-      console.log(" I am from article Api from response method");
-      console.log(response);
       return response.data;  
     }).catch(error => {
-      return error;
+      throw error;
     });
+  }
+
+  static getArticle(id){
+    return Axios.get(`/articles/${id}.json`)
+      .then(response => {
+        return response.data;
+      }).catch(error => {
+        throw error;
+      })
+  }
+
+  static createArticle(article){
+    return Axios.post('/articles.json', article)
+    .then(response => {
+      return response.data;
+    }).catch(error => {
+      throw error;
+    })
+  }
+
+  static updateArticle(article){
+    return Axios.put(`/articles/${article.id}.json`, article)
+    .then(response => {
+      return response.data;
+    }).catch(error => {
+      throw error;
+    });
+  }
+
+  static deleteArticle(article_id){
+    return Axios.delete(`/articles/${article_id}.json`)
+      .then(response => {
+         return response.data;
+      }).catch(error => {
+        throw error;
+      })
   }
 
 }
