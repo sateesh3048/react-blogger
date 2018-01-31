@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 import * as actions from '../../actions/articleActions';
 
 class NewArticlePage extends Component {
@@ -31,11 +31,24 @@ class NewArticlePage extends Component {
     let article_form = (
       <div>
         {this.props.article.isCreated ? <Redirect to="/articles" /> : null }
-        <h3>New Article Form</h3>
+        <h3 className="text-center">New Article Form</h3>
         <form>
-          Title<input type="text" name="title" value={this.state.title}   onChange={this.onChangeData} />
-          Content<input type="text" name="content" value={this.state.content} onChange={this.onChangeData} />
-          <input type="submit" value="Create Article" onClick={this.onSubmit}  />
+          <div className="form-group">
+            <label>Title</label>
+            <input type="text" name="title" className="form-control" value={this.state.title}   onChange={this.onChangeData} />
+          </div>
+          <div className="form-group">
+            <label>Content</label>
+            <input type="text" name="content" className="form-control" value={this.state.content}   onChange={this.onChangeData} />
+          </div>
+          <div className="form-group">
+            <div className="col-sm-offset-4 col-sm-2">
+              <input type="submit" value="Create Article" onClick={this.onSubmit}  className="btn btn-success" />
+            </div>
+            <div className="col-sm-2">
+              <Link to="/articles" className="btn btn-info">GoBack</Link>
+            </div>
+          </div>
         </form>
       </div>
     );

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import{bindActionCreators} from "redux";
 import * as actions from '../../actions/articleActions';
 
@@ -18,11 +18,13 @@ class EditArticlePage extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.setState({
-      id: nextProps.article.current_article.id,
-      title: nextProps.article.current_article.title,
-      content: nextProps.article.current_article.content
-    })
+   if((nextProps.article.current_article) && (nextProps.article.current_article.id !== this.state.id)){
+      this.setState({
+        id: nextProps.article.current_article.id,
+        title: nextProps.article.current_article.title,
+        content: nextProps.article.current_article.content
+      })
+    }
   }
 
 
@@ -57,9 +59,22 @@ class EditArticlePage extends Component {
         {this.props.article&&this.props.article.isUpdated ? <Redirect to="/articles" /> : null }
         <h3>Edit Article Form</h3>
         <form>
-          Title<input type="text" name="title" value={this.state.title}   onChange={this.onChangeData} />
-          Content<input type="text" name="content" value={this.state.content} onChange={this.onChangeData} />
-          <input type="submit" value="Update Article" onClick={this.onSubmit}  />
+          <div className="form-group">
+            <label>Title</label>
+            <input type="text" name="title" className="form-control" value={this.state.title}   onChange={this.onChangeData} />
+          </div>
+          <div className="form-group">
+            <label>Content</label>
+            <input type="text" name="content" className="form-control" value={this.state.content}   onChange={this.onChangeData} />
+          </div>
+          <div className="form-group">
+            <div className="col-sm-offset-4 col-sm-2">
+              <input type="submit" value="Update Article" onClick={this.onSubmit}  className="btn btn-success" />
+            </div>
+            <div className="col-sm-2">
+              <Link to="/articles" className="btn btn-info">GoBack</Link>
+            </div>
+          </div>
         </form>
       </div>
     );

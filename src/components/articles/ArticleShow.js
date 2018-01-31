@@ -32,19 +32,22 @@ const ArticleShow = (props) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-sm-2">Title</div>
+            <div className="col-sm-2">Title:</div>
             <div className="col-sm-8">{article.title}</div>
           </div>
           <div className="row">
-            <div className="col-sm-2">Content</div>
+            <div className="col-sm-2">Content:</div>
             <div className="col-sm-8">{article.content}</div>
           </div>
           <div className="row">
-            <div className="col-sm-2">
+            <div className="col-sm-offset-2 col-sm-1">
               <Link to={`/articles/${article.id}/edit`} className="btn btn-primary" >Edit</Link>
             </div>
-            <div className="col-sm-2">
+            <div className="col-sm-1">
               <button className="btn btn-danger" onClick={() => props.deleteArticle(article.id)}>Destroy</button>
+            </div>
+            <div className="col-sm-2">
+              <Link to='/articles' className="btn btn-info">Go Back</Link>
             </div>
           </div>
         </section>)
