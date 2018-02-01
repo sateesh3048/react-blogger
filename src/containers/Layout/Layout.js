@@ -1,12 +1,15 @@
 import React, {Component} from "react";
-import RoutesList from '../../routes';
-import Header from '../../components/common/Header/Header';
+import Header from './Header/Header';
+import Footer from '../../components/layout/Footer/Footer';
+import Main from '../../components/layout/Main/Main';
+
 class Layout extends Component {
     render(){
         return(
           <div>
               <Header />
-              <RoutesList />
+              <Main />
+              <Footer />
           </div>
         )
     }

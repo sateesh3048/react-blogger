@@ -14,17 +14,12 @@ export function loadArticles() {
 
 export function showArticle(id){
   return (dispatch) => {
-    console.log("I am inside show Article call");
-    
     dispatch(showArticleInit())    
     return articleApi.getArticle(id).then(article => {
       dispatch(showArticleSuccess(article));
     })
     .catch(error => {
-      console.log("I am from article actions >> showArticle");
-      console.log(error);
       dispatch(showArticleFail(id, error));
-      //throw(error);
     })
   }
 }
@@ -36,8 +31,6 @@ export function createArticle(article){
       dispatch(createArticleSuccess(created_article));
     })
     .catch(error => {
-      console.log("I am from article actions ");
-      console.log(error);
       throw(error);
     });
   }

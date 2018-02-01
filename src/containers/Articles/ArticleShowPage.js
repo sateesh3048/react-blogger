@@ -12,14 +12,10 @@ class ArticleShowPage extends Component {
 
   componentDidMount(){
     const article_id = this.props.match.params.id;
-    console.log("given article id from componentDidMount");
-    console.log(article_id);
     this.props.actions.showArticle(article_id);
   }
   
   render(){
-    console.log("article data from loading");
-    console.log(this.props.article);
     return(
       <div>
         {this.props.article.isDeleted ? <Redirect to="/articles" /> : null}

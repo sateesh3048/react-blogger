@@ -1,64 +1,66 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import {Row, Col} from "reactstrap";
+
 const ArticleShow = (props) => {
   let article = props.article;
   let articleUI = null;
   if(props.error){
     articleUI =(<section>
-              <div className="row">
-                <div className="col-sm-12">
+              <Row>
+                <Col xs="12">
                   <h3 className="text-center text-danger">
                     {props.error.toString()}
                   </h3>
-                </div>
-              </div>
+                </Col>
+              </Row>
             </section>)
   }
   else if(props.isLoading){
     articleUI =(<section>
-              <div className="row">
-                <div className="col-sm-12">
+              <Row>
+                <Col xs="12">
                   <h3 className="text-center">Please wait article is loading!</h3>
-                </div>
-              </div>
+                </Col>
+              </Row>
             </section>)
   }else{
     articleUI = (
       article? 
         (<section>
-          <div className="row">
-            <div className="col-sm-12">
+          <Row>
+            <Col xs="12">
               <h3 className="text-center">Welcome to Article</h3>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-2">Title:</div>
-            <div className="col-sm-8">{article.title}</div>
-          </div>
-          <div className="row">
-            <div className="col-sm-2">Content:</div>
-            <div className="col-sm-8">{article.content}</div>
-          </div>
-          <div className="row">
-            <div className="col-sm-offset-2 col-sm-1">
+            </Col>
+          </Row>
+          <Row>
+            <Col xs="2">Title:</Col>
+            <Col xs="8">{article.title}</Col>
+          </Row>
+          <Row>
+            <Col xs="2">Content:</Col>
+            <Col xs="8">{article.content}</Col>
+          </Row>
+          <Row>
+            <Col xs={{size: 2, offset: 2}} md={{size: 2}}>
               <Link to={`/articles/${article.id}/edit`} className="btn btn-primary" >Edit</Link>
-            </div>
-            <div className="col-sm-1">
+            </Col>
+            <Col xs="2" md="2">
               <button className="btn btn-danger" onClick={() => props.deleteArticle(article.id)}>Destroy</button>
-            </div>
-            <div className="col-sm-2">
-              <Link to='/articles' className="btn btn-info">Go Back</Link>
-            </div>
-          </div>
+            </Col>
+            <Col xs="2" md="2">
+              <Link to='/articles' className="btn btn-info">Back</Link>
+            </Col>
+          </Row>
         </section>)
         :
         (
           <section>
-            <div className="row">
-              <div className="col-sm-12">
+            <Row>
+              <Col xs="12">
                 <h3 className="text-center">Sorry article is not avilable</h3>
-              </div>
-            </div>
+              </Col>
+            </Row>
           </section>)
         )
   }
