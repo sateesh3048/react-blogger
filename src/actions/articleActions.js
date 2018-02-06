@@ -1,4 +1,5 @@
 import articleApi from '../api/articleApi';
+import * as actionTypes from '../actions/actionTypes';
 
 export function loadArticles() {
   return (dispatch) => {
@@ -8,8 +9,8 @@ export function loadArticles() {
     })
     .catch(error => {          
        dispatch(loadArticlesFail(error));
-    })
-  }
+    });
+  };
 };
 
 export function showArticle(id){
@@ -19,19 +20,18 @@ export function showArticle(id){
       dispatch(showArticleSuccess(article));
     })
     .catch(error => {
-      dispatch(showArticleFail(id, error));
-    })
-  }
-}
+      dispatch(showArticleFail(id, error.response.data.message));
+    });
+  };
+};
 
 export function createArticle(article){
   return (dispatch) => {
     return articleApi.createArticle(article).then(created_article => {
-      
       dispatch(createArticleSuccess(created_article));
     })
     .catch(error => {
-      throw(error);
+      dispatch(createArticleFail(error.response.data.message));
     });
   }
 }
@@ -41,53 +41,75 @@ export function updateArticle(article){
     return articleApi.updateArticle(article).then(updated_article => {
       dispatch(updatedArticleSuccess(updated_article));
     }).catch(error => {
-      throw(error);
+      dispatch(updateArticleFail(error.response.data.message));
     });
   }
-}
+};
 
 export function deleteArticle(article_id){
   return (dispatch) => {
     return articleApi.deleteArticle(article_id).then(response => {
       dispatch(deleteArticleSuccess(article_id));
     }).catch(error => {
-      throw error;
+      dispatch(deleteArticleFail(error.response.data.message));
     })
+  }
+};
+
+export function clearArticleErrorMessage(){
+  return (dispatch) => {
+    dispatch(removeArticleErrMsg());
   }
 }
 
 export function loadArticlesInit(){
-  return { type: "LOAD_ARTICLES_INIT", isLoading: true}
+  return { type: actionTypes.LOAD_ARTICLES_INIT, isLoading: true}
 }
 
 export function loadArticlesSuccess(articles){
-  return { type: "LOAD_ARTICLES_SUCCESS", articles: articles, isLoading: false}
+  return { type: actionTypes.LOAD_ARTICLES_SUCCESS, articles: articles, isLoading: false}
 }
 
 export function loadArticlesFail(error){
-  return { type: "LOAD_ARTICLES_FAIL", isLoading: false, error: error}
+  return { type: actionTypes.LOAD_ARTICLES_FAIL, isLoading: false, error: error}
 }
 
 export function showArticleInit(){
-  return { type: "SHOW_ARTICLE_INIT", isLoading: true}
+  return { type: actionTypes.SHOW_ARTICLE_INIT, isLoading: true}
 }
 
 export function showArticleSuccess(article){
-  return { type: "SHOW_ARTICLE_SUCCESS", article: article, isLoading: false}
+  return { type: actionTypes.SHOW_ARTICLE_SUCCESS, article: article, isLoading: false}
 }
 
 export function showArticleFail(article_id, error){
-  return { type: "SHOW_ARTICLE_FAIL", article_id: article_id, isLoading: false, error: error}
+  return { type: actionTypes.SHOW_ARTICLE_FAIL, article_id: article_id, isLoading: false, error: error}
 }
 
 export function createArticleSuccess(article){
-  return {type: "CREATE_ARTICLE_SUCCESS", article: article, isCreated: true}
+  return {type: actionTypes.CREATE_ARTICLE_SUCCESS, article: article, isCreated: true}
+}
+
+export function createArticleFail(error){
+  return {type: actionTypes.CREATE_ARTICLE_FAIL, error: error}
 }
 
 export function updatedArticleSuccess(article){
-  return {type: "UPDATE_ARTICLE_SUCCESS", article: article, isUpdated: true}
+  return {type: actionTypes.UPDATE_ARTICLE_SUCCESS, article: article, isUpdated: true}
+}
+
+export function updateArticleFail(error){
+  return {type: actionTypes.UPDATE_ARTICLE_FAIL, isLoading: false, error: error }
 }
 
 export function deleteArticleSuccess(article_id){
-  return { type: "DELETE_ARTICLE_SUCCESS", article_id: article_id, isDeleted: true}
+  return { type: actionTypes.DELETE_ARTICLE_SUCCESS, article_id: article_id, isDeleted: true}
+}
+
+export function deleteArticleFail(error){
+  return {type: actionTypes.DELETE_ARTICLE_FAIL , isLoading: false, error: error }
+}
+
+export function removeArticleErrMsg(){
+  return {type: actionTypes.CLEAR_ARTICLE_ERROR_MSG, error: null}
 }

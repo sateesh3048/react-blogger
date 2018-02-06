@@ -10,6 +10,10 @@ class ArticleShowPage extends Component {
     article: null
   }
 
+  componentWillUnmount(){
+    this.props.actions.clearArticleErrorMessage();
+  }
+
   componentDidMount(){
     const article_id = this.props.match.params.id;
     this.props.actions.showArticle(article_id);
@@ -23,6 +27,7 @@ class ArticleShowPage extends Component {
           article={this.props.article.current_article}
           deleteArticle={this.props.actions.deleteArticle}
           isLoading={this.props.article.isLoading}
+          isAuthenticated = {this.props.auth.isLoggedIn}
           error = {this.props.article.error}
         />
       </div>
@@ -32,7 +37,8 @@ class ArticleShowPage extends Component {
 
 const mapStateToProps = state => {
   return {
-     article: state.article
+     article: state.article,
+     auth: state.auth
   }
 };
 

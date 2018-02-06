@@ -19,9 +19,11 @@ class ArticlesListPage extends Component {
         <div className="col-sm-8">
           <h3 className="text-center">List of Articles</h3>
         </div>
-        <div className="col-sm-4">
-          <Link to="/articles/new" className="btn btn-primary">New Article</Link>
-        </div>
+        {this.props.auth.isLoggedIn===true &&
+          <div className="col-sm-4">
+            <Link to="/articles/new" className="btn btn-primary">New Article</Link>
+          </div>
+        }
       </div>
       <div className="row">
         <div className="col-md-12">
@@ -39,7 +41,8 @@ class ArticlesListPage extends Component {
 
   const mapStateToProps = (state) => {
     return {
-      article: state.article
+      article: state.article,
+      auth: state.auth
     }
   };
 

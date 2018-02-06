@@ -13,7 +13,7 @@ class ArticleForm extends Component {
       title: '',
       content: '',
       errors: {},
-      isValidForm: false
+      isValidForm: true
     }
   }
 
@@ -39,7 +39,7 @@ class ArticleForm extends Component {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
-    this.validateForm();
+    //this.validateForm();
   }
 
   validateForm = () => {
@@ -59,7 +59,7 @@ class ArticleForm extends Component {
   
   onSubmit = (e) => {
     e.preventDefault();
-    this.validateForm();
+    //this.validateForm();
     if(this.state.isValidForm){
       const article = {
         id: this.state.id,

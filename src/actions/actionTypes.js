@@ -1,3 +1,13 @@
+/* Begin of Auth Actions */
+export const AUTH_LOGIN_INIT = "AUTH_LOGIN_INIT";
+export const AUTH_LOGIN_SUCCESS = "AUTH_LOGIN_SUCCESS";
+export const AUTH_LOGIN_FAILURE = "AUTH_LOGIN_FAILURE";
+export const AUTH_VERIFY_LOGIN = "AUTH_VERIFY_LOGIN";
+
+export const AUTH_LOGOUT_SUCCESS = "AUTH_LOGOUT_SUCCESS";
+/* End of Auth Actions */
+
+/* Begin of Article Actions */
 export const LOAD_ARTICLES_INIT = "LOAD_ARTICLES_INIT";
 export const LOAD_ARTICLES_SUCCESS = 'LOAD_ARTICLES_SUCCESS';
 export const LOAD_ARTICLES_FAIL = 'LOAD_ARTICLES_FAIL';
@@ -14,5 +24,9 @@ export const UPDATE_ARTICLE_FAIL = 'UPDATE_ARTICLE_FAIL';
 
 export const DELETE_ARTICLE_SUCCESS = 'DELETE_ARTICLE_SUCCESS';
 export const DELETE_ARTICLE_FAIL = 'DELETE_ARTICLE_FAIL';
+
+export const CLEAR_ARTICLE_ERROR_MSG = 'CLEAR_ARTICLE_ERROR_MSG';
+/* End of Article Actions */
+
 
 

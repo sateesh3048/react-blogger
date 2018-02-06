@@ -5,9 +5,10 @@ import {Nav,
   Navbar, 
   NavbarBrand, 
   NavbarToggler, 
-  Collapse} from "reactstrap"
+  Collapse} from "reactstrap";
+  import {connect} from "react-redux";
 
-export default class Header extends Component {
+class Header extends Component {
   state = {
     isOpen: false
   }
@@ -17,12 +18,13 @@ export default class Header extends Component {
   }
 
   render(){
+
     return(<header>
       <Navbar   light expand="md" className="bg-secondary">
         <NavbarBrand href="/">Blogger</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav navbar>
+          <Nav navbar className="mr-auto">
             <NavItem>
               <NavLink to="/articles" className="nav-link" >
                 Articles
@@ -34,8 +36,34 @@ export default class Header extends Component {
               </NavLink>
             </NavItem>
           </Nav>
+          {this.props.auth.isLoggedIn
+            ? 
+            <Nav navbar>
+              <NavItem>
+                <NavLink to="/logout"  className="nav-link">
+                  Logout
+                </NavLink>
+              </NavItem>
+            </Nav>
+            :
+            <Nav navbar>
+              <NavItem>
+                <NavLink to="/login"  className="nav-link">
+                  Login
+                </NavLink>
+              </NavItem>
+            </Nav>
+          }
         </Collapse>
       </Navbar>
     </header>);
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps)(Header);
